@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122951062-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-122951062-1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="XrpHejd9amysFxofy76e0kn0eldu1LBqtoxAWMWC">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Askartec</title>
+
+    <!-- Scripts -->
+    <script src="https://askartec.com/js/app.js" defer></script>
+
+    <!-- Styles -->
+    <link href="https://askartec.com/css/app.css" rel="stylesheet">
+</head>
+
+<body>
+<div id="app">
+        <div id="top" class="container-fluid">
+        <a href="#top" class="up"><img src="img/decoration/up.svg" alt=""></a>
+        <header class="main-header">
+            <nav class="main-nav row justify-content-md-start align-items-center">
+                <div class="main-nav__logo col-md-7">
+                    <a href="#"><img src="img/logo/logo-askartec.svg" alt="Askartec"></a>
+                </div>
+                <ul class="main-nav__list nav-list col-md-3">
+                    <li class="nav-list__item"><a href="#about_us">О нас</a></li>
+                    <li class="nav-list__item"><a href="#services">Делаем</a></li>
+                    <li class="nav-list__item"><a href="#technology">Технологии</a></li>
+                </ul>
+                <div class="nav-btn__wrapper col-md-2">
+                    <button class="main-nav__btn" data-toggle="modal" data-target="#myModal">Написать нам</button>
+                </div>
+            </nav>
+
+            <section class="presentation">
+                <div class="presentation__wrapper">
+                <vue-typed-js :strings="['IT решения <br/>для инноваторов', 'Мобильные <br/>и веб приложения', 'Платежные <br/>и транзакционные шлюзы', 'Облачные <br/>инфраструктуры',
+                                         'Работаем <br/>с Big data', 'Внедряем электронный <br/>документооборот', 'Улучшаем <br/>онлайн-маркетинг']" :loop="true" :typeSpeed="70" :backSpeed="30">
+                    <h1 class="typing presentation__header"></h1>
+                </vue-typed-js>
+                </div>
+                <p class="presentation__paragraph">Разрабатываем ПО для бизнеса, знаем, что нужно крупным компаниям <br>
+                    чтобы достичь лучших результатов!</p>
+                <button class="presentation__button" data-toggle="modal" data-target="#myModal">Написать нам</button>
+            </section>
+
+            <section class="client">
+                <h4 class="client__header">Нам доверяют:</h4>
+                <ul class="client-list row">
+                    <li class="client-list__item"><img src="img/logo/logo-beeline.svg" alt="beeline"></li>
+                    <li class="client-list__item"><img src="img/logo/logo-tele2.svg" alt="tele2"></li>
+                    <li class="client-list__item"><img src="img/logo/logo-greenlight.svg" alt="greenlight"></li>
+                    <li class="client-list__item"><img src="img/logo/logo-rosinbank.svg" alt="rosinbank"></li>
+                    <li class="client-list__item"><img src="img/logo/logo-gazprom.svg" alt="gazprom"></li>
+                    <li class="client-list__item"><img src="img/logo/logo-otc.svg" alt="otc"></li>
+                </ul>
+            </section>
+            <div id="about_us" class="topLink" style="height: 100px"></div>
+            <section class="advantages row justify-content-around">
+                <figure class="advantages-item col">
+                    <picture class="advantages-item__decoration">
+                        <img src="img/decoration/an_experience.png" alt="experience">
+                    </picture>
+                    <figcaption class="advantages-item__description">
+                        <h4 class="advantages-item__header">Опыт</h4>
+                        <p class="advantages-item__paragraph">С 2015 года сделали более 20 проектов для заказчиков в
+                            Кыргызстане и России</p>
+                    </figcaption>
+                </figure>
+
+                <figure class="advantages-item col">
+                    <picture class="advantages-item__decoration">
+                        <img src="img/decoration/knowledge.png" alt="knowledge">
+                    </picture>
+                    <figcaption class="advantages-item__description">
+                        <h4 class="advantages-item__header">Знания</h4>
+                        <p class="advantages-item__paragraph">Специалисты высокого класса с опытом работы в банковской и
+                            телеком отраслях</p>
+                    </figcaption>
+                </figure>
+
+                <figure class="advantages-item col">
+                    <picture class="advantages-item__decoration">
+                        <img src="img/decoration/quality.png" alt="quality">
+                    </picture>
+                    <figcaption class="advantages-item__description">
+                        <h4 class="advantages-item__header">Качество</h4>
+                        <p class="advantages-item__paragraph">Профессиональные стандарты управления проектами,
+                            разработки и тестирования</p>
+                    </figcaption>
+                </figure>
+
+                <figure class="advantages-item col">
+                    <picture class="advantages-item__decoration">
+                        <img src="img/decoration/team.png" alt="team">
+                    </picture>
+                    <figcaption class="advantages-item__description">
+                        <h4 class="advantages-item__header">Команда</h4>
+                        <p class="advantages-item__paragraph">Более 40 специалистов в офисах в Бишкеке и Москве</p>
+                    </figcaption>
+                </figure>
+            </section>
+        </header>
+
+        <main class="main-content">
+            <section id="services" class="main-item row">
+                <div class="item-description--left col-md-6">
+                    <h2 class="item-description__header">Разработка <br>мобильных <br>и веб приложений</h2>
+                    <ul class="item-description__list list">
+                        <li class="list__item">Комплексные веб и мобильные приложения <br>для больших компаний, фронтенд
+                            и бекэнд
+                        </li>
+                        <li class="list__item">Современный адаптивный и реактивный <br>пользовательский интерфейс</li>
+                        <li class="list__item">Профессиональный дизайн и разработка <br>пользовательского интерфейсов
+                        </li>
+                        <li class="list__item">Интеграция с ABC, CRM, биллингом и <br>другими внутренними системами</li>
+                    </ul>
+                </div>
+                <picture class="item-decoration--right col-md-6">
+                    <source srcset="img/decoration/development@75x.png" media="(max-width: 1440px)">
+                    <img src="img/decoration/development.png" alt="development">
+                </picture>
+            </section>
+
+            <section class="main-item row">
+                <picture class="item-decoration--left col-md-6">
+                    <source srcset="img/decoration/testing@75x.png" media="(max-width: 1440px)">
+                    <img src="img/decoration/testing.png" alt="testing">
+                </picture>
+                <div class="item-description--right col-md-6">
+                    <h2 class="item-description__header">Тестирование <br>приложений <br>и сервисов</h2>
+                    <ul class="item-description__list list">
+                        <li class="list__item">Профессиональное тестирование приложений, изменений, <br>услуг, как
+                            сервис для организаций
+                        </li>
+                        <li class="list__item">Специализированное тестирование для банковских <br>продуктов</li>
+                        <li class="list__item">Организация качественных процессов управления <br>релизами и деплоймента
+                            измненений
+                        </li>
+                        <li class="list__item">Автоматизированное функциональное тестирование</li>
+                        <li class="list__item">Нагрузочное тестирование</li>
+                        <li class="list__item">Тестирование качества услуг организации</li>
+                    </ul>
+                </div>
+            </section>
+
+            <div class="service-wrapper row">
+                <section class="service crm col-md-4">
+                    <figure class="service-item">
+                        <picture class="service-item__decoration">
+                            <img src="img/decoration/crm.png" alt="crm">
+                        </picture>
+                        <figcaption class="service-item__description">Автоматизация <br>офиса, CRM</figcaption>
+                    </figure>
+                    <ul class="service-list">
+                        <li class="service-list__item">Единая платформа, со сквозными <br>процессами обслуживания
+                            клиентов и интеграцией с ABC
+                        </li>
+                        <li class="service-list__item">Мониторинг качества и скорости <br>обслуживания клиентов</li>
+                        <li class="service-list__item">Построение эффективных <br>автоматизированных <br> конвееров
+                            продаж
+                        </li>
+                        <li class="service-list__item">Постороение эффективных процессов <br>бэк офиса: кредитные <br>андеррайтинг,
+                            коллекшен и т.д.
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="service doc col-md-4">
+                    <figure class="service-item">
+                        <picture class="service-item__decoration">
+                            <img src="img/decoration/workflow.png" alt="workflow">
+                        </picture>
+                        <figcaption class="service-item__description">Электронный <br>документооборот</figcaption>
+                    </figure>
+                    <ul class="service-list">
+                        <li class="service-list__item">Эффективно работающие <br>бизнес-процессы</li>
+                        <li class="service-list__item">Избавление от 90% бумаги <br>в организации</li>
+                        <li class="service-list__item">Мониторинг и контроль</li>
+                        <li class="service-list__item">Быстрый результат</li>
+                        <li class="service-list__item">Поддержка юридически значимой ЭЦП</li>
+                    </ul>
+                </section>
+
+                <section class="service center col-md-4">
+                    <figure class="service-item">
+                        <picture class="service-item__decoration">
+                            <img src="img/decoration/contact.png" alt="contact">
+                        </picture>
+                        <figcaption class="service-item__description">Контакт <br>центры</figcaption>
+                    </figure>
+                    <ul class="service-list">
+                        <li class="service-list__item">Омниканальные коммуникации</li>
+                        <li class="service-list__item">Интеграции с CRM и другими системами</li>
+                        <li class="service-list__item">Идентификация клиентов и полноценное дистанционное банковское
+                            обслуживание
+                        </li>
+                        <li class="service-list__item">Организация линий поддержки</li>
+                    </ul>
+                </section>
+            </div>
+            <section class="main-item row">
+                <div class="item-description--left col-md-6">
+                    <h2 class="item-description__header">Распознавание <br>лиц</h2>
+                    <ul class="item-description__list list">
+                        <li class="list__item">Подтверждение и верификация операций <br>дистанционного обслуживания</li>
+                        <li class="list__item">Мониторинг длительности нахождения клиентов <br>в офисах обслуживания
+                        </li>
+                        <li class="list__item">Централизованная верификация операций в <br>офисах обслуживания</li>
+                        <li class="list__item">Моментальное обслуживание VIP клиентов в <br>офисах обслуживания</li>
+                        <li class="list__item">Безопасность</li>
+                    </ul>
+                </div>
+                <picture class="item-decoration--right col-md-6">
+                    <source srcset="img/decoration/faceid@75x.png" media="(max-width: 1440px)">
+                    <img src="img/decoration/faceid.png" alt="faceid">
+                </picture>
+            </section>
+
+            <section class="main-item row">
+                <picture class="item-decoration--left col-md-6">
+                    <source srcset="img/decoration/gateway@75x.png" media="(max-width: 1440px)">
+                    <img src="img/decoration/gateway.png" alt="gateway">
+                </picture>
+                <div class="item-description--right col-md-6">
+                    <h2 class="item-description__header">Транзакционные <br>и платежные <br>шлюзы</h2>
+                    <ul class="item-description__list list">
+                        <li class="list__item">Мониторинг, алерты и отчетность</li>
+                        <li class="list__item">Надежные и интеграционные шлюзы, с гарантией <br>обработки сообщений</li>
+                        <li class="list__item">Интеграция с карточными процессингами</li>
+                        <li class="list__item">Готовая обкатанная в продакшене платформа, высокая <br>скорость
+                            разработки
+                        </li>
+                        <li class="list__item">Встроенный антифрод проверки и лимиты</li>
+                        <li class="list__item">Множество готовых коннекторов</li>
+                    </ul>
+                </div>
+            </section>
+
+            <div class="bg-black">
+                <section class="main-item row">
+                    <div class="item-description--left col-md-6">
+                        <h2 class="item-description__header--white">Big data <br>решения</h2>
+                        <ul class="item-description__list list">
+                            <li class="list__item--gray">Сбор и массовая обработка данных о гражданах и <br>организациях
+                            </li>
+                            <li class="list__item--gray">Скоринг заемщиков</li>
+                            <li class="list__item--gray">Проверка и мониторинг контрагентов</li>
+                            <li class="list__item--gray">Интеграция с «бюро кредитных историй»</li>
+                            <li class="list__item--gray">Автоматизированные аналитические решения</li>
+                        </ul>
+                    </div>
+                    <picture class="item-decoration--right col-md-6">
+                        <source srcset="img/decoration/bigdata@75x.png" media="(max-width: 1440px)">
+                        <img src="img/decoration/bigdata.png" alt="bigdata">
+                    </picture>
+                </section>
+
+                <section class="main-item row">
+                    <picture class="item-decoration--left col-md-6">
+                        <source srcset="img/decoration/cloud@75x.png" media="(max-width: 1440px)">
+                        <img src="img/decoration/cloud.png" alt="cloud">
+                    </picture>
+                    <div class="item-description--right col-md-6">
+                        <h2 class="item-description__header--white">Облачные <br>инфраструктуры</h2>
+                        <ul class="item-description__list list">
+                            <li class="list__item--gray">IaaS облака (инфраструктура как сервис), для быстрого <br>развертывания
+                                серверов
+                            </li>
+                            <li class="list__item--gray">PaaS облака (платформа как сервис), для разработки и <br>развертывания
+                                контейнерезированных приложений нового
+                                <br>поколения
+                            </li>
+                            <li class="list__item--gray">Эффективная современная микросервисная архитектура</li>
+                            <li class="list__item--gray">Облако для тестовых сред</li>
+                            <li class="list__item--gray">Автоматизация деплоймента и развертывания</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="main-item row">
+                    <div class="item-description--left col-md-6">
+                        <h2 class="item-description__header--white">Хранилища данных <br>и бизнес-аналитика</h2>
+                        <ul class="item-description__list list">
+                            <li class="list__item--gray">Отчеты и дашборды</li>
+                            <li class="list__item--gray">Аналитические запросы</li>
+                            <li class="list__item--gray">Операционная отчетность</li>
+                            <li class="list__item--gray">Бизнес-алерты</li>
+                            <li class="list__item--gray">Аналитические решения</li>
+                        </ul>
+                    </div>
+                    <picture class="item-decoration--right col-md-6">
+                        <source srcset="img/decoration/storage@75x.png" media="(max-width: 1440px)">
+                        <img src="img/decoration/storage.png" alt="storage">
+                    </picture>
+                </section>
+
+                <section id="technology" class="technology container-fluid">
+                    <h2 class="technology__header col-md-12">Технологии которые мы используем:</h2>
+                    <div class="technology__wrapper row justify-content-between">
+                        <div class="technology__item"><img src="img/logo/react.svg" alt="reactjs"></div>
+                        <div class="technology__item"><img src="img/logo/react-native.svg" alt="react-native"></div>
+                        <div class="technology__item"><img src="img/logo/kafka.svg" alt="kafka"></div>
+                        <div class="technology__item"><img src="img/logo/angular.svg" alt="angularjs"></div>
+                        <div class="technology__item"><img src="img/logo/meteor.svg" alt="meteor"></div>
+                        <div class="technology__item"><img src="img/logo/spark.svg" alt="spark"></div>
+                        <div class="technology__item"><img src="img/logo/node.svg" alt="node"></div>
+                    </div>
+
+                    <div class="technology__wrapper row justify-content-between">
+                        <div class="technology__item"><img src="img/logo/cassandra.svg" alt="cassandra"></div>
+                        <div class="technology__item"><img src="img/logo/openstack.svg" alt="openstack"></div>
+                        <div class="technology__item"><img src="img/logo/docker.svg" alt="docker"></div>
+                        <div class="technology__item"><img src="img/logo/dcos.svg" alt="dcos"></div>
+                        <div class="technology__item"><img src="img/logo/kubernetes.svg" alt="kubernetes"></div>
+                        <div class="technology__item"><img src="img/logo/se.svg" alt="se"></div>
+                        <div class="technology__item"><img src="img/logo/java.svg" alt="java"></div>
+                    </div>
+
+                    <div class="technology__wrapper row justify-content-between">
+                        <div class="technology__item"><img src="img/logo/atlassian.svg" alt="atlassian"></div>
+                        <div class="technology__item"><img src="img/logo/terrasoft.svg" alt="terrasoft"></div>
+                        <div class="technology__item"><img src="img/logo/oracle.svg" alt="oracle"></div>
+                        <div class="technology__item"><img src="img/logo/sap.svg" alt="sap"></div>
+                        <div class="technology__item"><img src="img/logo/mongodb.svg" alt="mongodb"></div>
+                        <div class="technology__item"><img src="img/logo/power-bi.svg" alt="power-bi"></div>
+                        <div class="technology__item"><img src="img/logo/android-apple.svg" alt="android-apple"></div>
+                    </div>
+                </section>
+            </div>
+
+            <footer class="main-footer row">
+                <div class="main-footer__logo">
+                    <img src="img/logo/logo-askartec.svg" alt="Askartec">
+                    <p class="copy">© 2017—2018 Askartec. Все права защищены</p>
+                </div>
+                <address class="main-footer__address">
+                    <p class="contact main_contact">ул.Рыскулова 79Б, г.Бишкек, <br>Кыргызстан, 720000</p>
+                    <p class="contact">+996(312)975‑666 <br><a class="mail" href="mailto:office@askartec.com">office@askartec.com</a></p>
+                </address>
+                <div class="social-media">
+                    <a class="social-media__item facebook" href="http://facebook.com/askartec/" target="_blank"></a>
+                    <a class="social-media__item twitter" href="https://twitter.com/askartec/" target="_blank"></a>
+                    
+                    <a class="social-media__item instagram" href="https://www.instagram.com/askartec/" target="_blank"></a>
+                    <a class="social-media__item linkedin" href="https://www.linkedin.com/showcase/askartec/" target="_blank"></a>
+                    
+                </div>
+            </footer>
+        </main>
+        <modal></modal>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

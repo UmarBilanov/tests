@@ -1,0 +1,7 @@
+actor: ApiTester
+modules:
+    enabled:
+        - REST:
+            url: https://jsonplaceholder.typicode.com
+            depends: PhpBrowser
+            part: Json
