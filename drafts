@@ -1,1 +1,143 @@
 
+package com.rysgalbank.RysgalPay;
+
+  import android.os.Bundle;
+  import android.util.Log;
+
+  import org.apache.cordova.*;
+
+  import java.io.BufferedReader;
+  import java.io.FileNotFoundException;
+  import java.io.IOException;
+  import java.io.InputStream;
+  import java.io.InputStreamReader;
+
+public class WidgetActivity extends CordovaActivity
+{
+  @Override
+  public void onCreate(Bundle savedInstanceState)
+  {
+    super.onCreate(savedInstanceState);
+
+    // enable Cordova apps to be started in the background
+    Bundle extras = getIntent().getExtras();
+    if (extras != null && extras.getBoolean("cdvStartInBackground", false)) {
+      moveTaskToBack(true);
+    }
+
+//        String strGeneratorMsg = "QRGenerator";
+//        String strScanMsg = "QRScanner";
+//        String strIndexMsg = "Index";
+//        String message = (String) getIntent().getSerializableExtra("action");
+//
+//        if(message.equals(strGeneratorMsg)){
+//          loadUrl("file:///android_asset/www/index.html#/generate");
+//        } else if (message.equals(strScanMsg)){
+//          loadUrl("file:///android_asset/www/index.html#/scan");
+//        } else if (message.equals(strIndexMsg)){
+//          loadUrl(launchUrl);
+//        }
+
+    // Set by <content src="index.html" /> in config.xml
+    readFromTextFile();
+    loadUrl(launchUrl);
+    Log.d("lifecycle","onCreate invoked");
+    readFromFile();
+  }
+
+  @Override
+  public void onResume()
+  {
+    String strGeneratorMsg = "QRGenerator";
+    String strScanMsg = "QRScanner";
+    String strIndexMsg = "Index";
+    String message = (String) getIntent().getSerializableExtra("action");
+
+    if(message.equals(strGeneratorMsg)){
+      loadUrl("file:///android_asset/www/index.html#/generate");
+    } else if (message.equals(strScanMsg)){
+      loadUrl("file:///android_asset/www/index.html#/scan");
+    } else if (message.equals(strIndexMsg)){
+      loadUrl(launchUrl);
+    } else {
+      super.onResume();
+    }
+
+    Log.d("lifecycle","onResume INVOKED" + message);
+    readFromFile();
+  }
+
+  public String readFromFile() {
+
+    String ret = "";
+
+    try {
+      InputStream inputStream = getBaseContext().openFileInput("Example.txt");
+
+      if ( inputStream != null ) {
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        String receiveString = "";
+        StringBuilder stringBuilder = new StringBuilder();
+
+        while ( (receiveString = bufferedReader.readLine()) != null ) {
+          stringBuilder.append(receiveString);
+        }
+
+        inputStream.close();
+        ret = stringBuilder.toString();
+
+        Log.d("login activity", "Founded file: " + ret);
+      }
+    }
+    catch (FileNotFoundException e) {
+      Log.e("login activity", "File not found: " + e.toString());
+    } catch (IOException e) {
+      Log.e("login activity", "Can not read file: " + e.toString());
+    }
+
+    return ret;
+  }
+
+  public String readFromTextFile() {
+    String text = "";
+    try {
+      InputStream is = getBaseContext().getAssets().open("Example.txt");
+      int size = is.available();
+      byte[] buffer = new byte[size];
+      is.read(buffer);
+      is.close();
+      text = new String(buffer);
+      Log.d("lifecycle","Getted text" + text);
+    } catch(IOException ex) {
+      ex.printStackTrace();
+    }
+    return text;
+  }
+
+//  @Override
+//  public void onPause (){
+//    Bundle extras = getIntent().getExtras();
+//    if (extras != null && extras.getBoolean("cdvStartInBackground", false)) {
+//      moveTaskToBack(true);
+//    }
+//
+//    String strGeneratorMsg = "QRGenerator";
+//    String strScanMsg = "QRScanner";
+//    String strIndexMsg = "Index";
+//    String message = (String) getIntent().getSerializableExtra("action");
+//
+//    if(message.equals(strGeneratorMsg)){
+//      finish();
+//      loadUrl("file:///android_asset/www/index.html#/generate");
+//    } else if (message.equals(strScanMsg)){
+//      finish();
+//      loadUrl("file:///android_asset/www/index.html#/scan");
+//    } else if (message.equals(strIndexMsg)){
+//      finish();
+//      loadUrl("file:///android_asset/www/index.html");
+//    } else {
+//      super.onPause();
+//    }
+//  }
+}
