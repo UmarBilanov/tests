@@ -1,0 +1,434 @@
+/*
+       Licensed to the Apache Software Foundation (ASF) under one
+       or more contributor license agreements.  See the NOTICE file
+       distributed with this work for additional information
+       regarding copyright ownership.  The ASF licenses this file
+       to you under the Apache License, Version 2.0 (the
+       "License"); you may not use this file except in compliance
+       with the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agreed to in writing,
+       software distributed under the License is distributed on an
+       "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+       KIND, either express or implied.  See the License for the
+       specific language governing permissions and limitations
+       under the License.
+ */
+
+package com.rysgalbank.RysgalPay;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
+
+import org.apache.cordova.*;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+public class MainActivity extends CordovaActivity
+{
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+
+        // enable Cordova apps to be started in the background
+        Bundle extras = getIntent().getExtras();
+        if (extras != null && extras.getBoolean("cdvStartInBackground", false)) {
+            moveTaskToBack(true);
+        }
+
+        String strGeneratorMsg = "QRGenerator";
+        String strScanMsg = "QRScanner";
+        String strIndexMsg = "Index";
+        String message = (String) getIntent().getSerializableExtra("action");
+
+//        TextView tv_text = (TextView) findViewById(R.id.widget_horizontal_cards_info);
+
+        String AccountAmount = "";
+
+        Log.d("lifecycle","onCreate. Main Activity. " + message);
+
+      readFromFile();
+      String text = readFromFile();
+
+      if (message != null) {
+        if (message.equals(strGeneratorMsg)) {
+          Log.d("lifecycle", "onCreate. Route to QR Generator.");
+
+          try {
+              JSONObject jsonTextObj = new JSONObject(text);
+              Log.d("lifecycle","TestJsonParse" + jsonTextObj);
+              jsonTextObj.put("Page", strGeneratorMsg);
+              AccountAmount = jsonTextObj.getString("Amount");
+              writeToFile(jsonTextObj.toString());
+              Log.d("main activity", "Stored file on QR Generate: " + jsonTextObj.toString());
+            } catch (JSONException e) {
+              e.printStackTrace();
+            }
+
+          loadUrl("file:///android_asset/www/index.html#/generate");
+        } else if (message.equals(strScanMsg)) {
+          Log.d("lifecycle", "onCreate. Route to QR Scan.");
+
+          try {
+            JSONObject jsonTextObj = new JSONObject(text);
+            Log.d("lifecycle","TestJsonParse" + jsonTextObj);
+            jsonTextObj.put("Page", strScanMsg);
+            AccountAmount = jsonTextObj.getString("Amount");
+            writeToFile(jsonTextObj.toString());
+            Log.d("main activity", "Stored file on QR Generate: " + jsonTextObj.toString());
+          } catch (JSONException e) {
+            e.printStackTrace();
+          }
+
+          loadUrl("file:///android_asset/www/index.html#/scan");
+        } else if (message.equals(strIndexMsg)) {
+          Log.d("lifecycle", "onCreate. Route to Index.");
+
+          try {
+            JSONObject jsonTextObj = new JSONObject(text);
+            Log.d("lifecycle","TestJsonParse" + jsonTextObj);
+            jsonTextObj.put("Page", strIndexMsg);
+            AccountAmount = jsonTextObj.getString("Amount");
+            writeToFile(jsonTextObj.toString());
+            Log.d("main activity", "Stored file on QR Generate: " + jsonTextObj.toString());
+          } catch (JSONException e) {
+            e.printStackTrace();
+          }
+
+          loadUrl(launchUrl);
+        } else {
+          Log.d("lifecycle", "onCreate. Route to Index.");
+
+          try {
+            JSONObject jsonTextObj = new JSONObject(text);
+            Log.d("lifecycle","TestJsonParse" + jsonTextObj);
+            jsonTextObj.put("Page", strIndexMsg);
+            AccountAmount = jsonTextObj.getString("Amount");
+            writeToFile(jsonTextObj.toString());
+            Log.d("main activity", "Stored file on QR Generate: " + jsonTextObj.toString());
+          } catch (JSONException e) {
+            e.printStackTrace();
+          }
+
+          loadUrl(launchUrl);
+        }
+      } else {
+        Log.d("lifecycle", "onCreate. Route to Index.");
+
+        try {
+          JSONObject jsonTextObj = new JSONObject(text);
+          Log.d("lifecycle","TestJsonParse" + jsonTextObj);
+          jsonTextObj.put("Page", strIndexMsg);
+          AccountAmount = jsonTextObj.getString("Amount");
+          writeToFile(jsonTextObj.toString());
+          Log.d("main activity", "Stored file on QR Generate: " + jsonTextObj.toString());
+        } catch (JSONException e) {
+          e.printStackTrace();
+        }
+
+        loadUrl(launchUrl);
+      }
+
+//      if (message != null){
+//          if(message.equals(strGeneratorMsg)){
+//            Log.d("lifecycle","onCreate. Route to QR Generator.");
+//            try {
+//              JSONObject jsonTextObj = new JSONObject(text);
+//              Log.d("lifecycle","TestJsonParse" + jsonTextObj);
+//              jsonTextObj.put("Page", strGeneratorMsg);
+//              AccountAmount = jsonTextObj.getString("Amount");
+//              writeToFile(jsonTextObj.toString());
+//              Log.d("main activity", "Stored file on QR Generate: " + jsonTextObj.toString());
+//            } catch (JSONException e) {
+//              e.printStackTrace();
+//            }
+//            loadUrl(launchUrl);
+//            readFromFile2();
+//          } else if (message.equals(strScanMsg)){
+//            Log.d("lifecycle","onCreate. Route to QR Scan.");
+//            try {
+//              JSONObject jsonTextObj = new JSONObject(text);
+//              Log.d("lifecycle","TestJsonParse" + jsonTextObj);
+//              jsonTextObj.put("Page", strScanMsg);
+//              AccountAmount = jsonTextObj.getString("Amount");
+//              writeToFile(jsonTextObj.toString());
+//              Log.d("main activity", "Stored file on QR Scan: " + jsonTextObj.toString());
+//            } catch (JSONException e) {
+//              e.printStackTrace();
+//            }
+//            loadUrl(launchUrl);
+//            readFromFile2();
+//          } else if (message.equals(strIndexMsg)){
+//            Log.d("lifecycle","onCreate. Route to Index.");
+//            try {
+//              JSONObject jsonTextObj = new JSONObject(text);
+//              Log.d("lifecycle","TestJsonParse" + jsonTextObj);
+//              jsonTextObj.put("Page", strIndexMsg);
+//              AccountAmount = jsonTextObj.getString("Amount");
+//              writeToFile(jsonTextObj.toString());
+//              Log.d("main activity", "Stored file on Index: " + jsonTextObj.toString());
+//            } catch (JSONException e) {
+//              e.printStackTrace();
+//            }
+//            loadUrl(launchUrl);
+//            readFromFile2();
+//          } else {
+//            Log.d("lifecycle","onCreate. Route to Index.");
+//            try {
+//              JSONObject jsonTextObj = new JSONObject(text);
+//              Log.d("lifecycle","TestJsonParse" + jsonTextObj);
+//              jsonTextObj.put("Page", strIndexMsg);
+//              AccountAmount = jsonTextObj.getString("Amount");
+//              writeToFile(jsonTextObj.toString());
+//              Log.d("main activity", "Stored file on Index: " + jsonTextObj.toString());
+//            } catch (JSONException e) {
+//              e.printStackTrace();
+//            }
+//            loadUrl(launchUrl);
+//            readFromFile2();
+//          }
+//        } else {
+//        Log.d("lifecycle","onCreate. Route to Index.");
+//        try {
+//          JSONObject jsonTextObj = new JSONObject(text);
+//          Log.d("lifecycle","TestJsonParse" + jsonTextObj);
+//          jsonTextObj.put("Page", strIndexMsg);
+//          AccountAmount = jsonTextObj.getString("Amount");
+//          writeToFile(jsonTextObj.toString());
+//          Log.d("main activity", "Stored file on Index: " + jsonTextObj.toString());
+//        } catch (JSONException e) {
+//          e.printStackTrace();
+//        }
+//        loadUrl(launchUrl);
+//        readFromFile2();
+//        }
+
+//
+//      readFromFile();
+//        readFromFile2();
+//        loadUrl(launchUrl);
+//        Log.d("lifecycle","onCreate invoked");
+//        String data1 = readFromFile();
+//        String data2 = "{exampleKey3:exampleValue3}";
+//        String data = data1 + data2;
+//        writeToFile(data);
+//        Log.d("main activity", "Stored file: " + data);
+//        // Set by <content src="index.html" /> in config.xml
+////        loadUrl(launchUrl);
+    }
+
+//  @Override
+//  public void onResume()
+//  {
+//
+//    String strGeneratorMsg = "QRGenerator";
+//    String strScanMsg = "QRScanner";
+//    String strIndexMsg = "Index";
+//    String message = (String) getIntent().getSerializableExtra("action");
+//
+////        TextView tv_text = (TextView) findViewById(R.id.widget_horizontal_cards_info);
+//
+//    String AccountAmount = "";
+//
+//    Log.d("lifecycle","onResume. Main Activity. " + message);
+//
+//    readFromFile();
+//    String text = readFromFile();
+//
+//    if (message != null) {
+//      if (message.equals(strGeneratorMsg)) {
+//        Log.d("lifecycle", "onResume. Route to QR Generator.");
+//
+//        try {
+//          JSONObject jsonTextObj = new JSONObject(text);
+//          Log.d("lifecycle","TestJsonParse" + jsonTextObj);
+//          jsonTextObj.put("Page", strGeneratorMsg);
+//          AccountAmount = jsonTextObj.getString("Amount");
+//          writeToFile(jsonTextObj.toString());
+//          Log.d("main activity", "Stored file on QR Generate: " + jsonTextObj.toString());
+//        } catch (JSONException e) {
+//          e.printStackTrace();
+//        }
+//
+//        loadUrl("file:///android_asset/www/index.html#/generate");
+//      } else if (message.equals(strScanMsg)) {
+//        Log.d("lifecycle", "onResume. Route to QR Scan.");
+//
+//        try {
+//          JSONObject jsonTextObj = new JSONObject(text);
+//          Log.d("lifecycle","TestJsonParse" + jsonTextObj);
+//          jsonTextObj.put("Page", strGeneratorMsg);
+//          AccountAmount = jsonTextObj.getString("Amount");
+//          writeToFile(jsonTextObj.toString());
+//          Log.d("main activity", "Stored file on QR Generate: " + jsonTextObj.toString());
+//        } catch (JSONException e) {
+//          e.printStackTrace();
+//        }
+//
+//        loadUrl("file:///android_asset/www/index.html#/scan");
+//      } else if (message.equals(strIndexMsg)) {
+//        Log.d("lifecycle", "onResume. Route to Index.");
+//
+//        try {
+//          JSONObject jsonTextObj = new JSONObject(text);
+//          Log.d("lifecycle","TestJsonParse" + jsonTextObj);
+//          jsonTextObj.put("Page", strGeneratorMsg);
+//          AccountAmount = jsonTextObj.getString("Amount");
+//          writeToFile(jsonTextObj.toString());
+//          Log.d("main activity", "Stored file on QR Generate: " + jsonTextObj.toString());
+//        } catch (JSONException e) {
+//          e.printStackTrace();
+//        }
+//
+//        loadUrl(launchUrl);
+//      } else {
+//        Log.d("lifecycle", "onResume. Route to Index.");
+//
+//        try {
+//          JSONObject jsonTextObj = new JSONObject(text);
+//          Log.d("lifecycle","TestJsonParse" + jsonTextObj);
+//          jsonTextObj.put("Page", strGeneratorMsg);
+//          AccountAmount = jsonTextObj.getString("Amount");
+//          writeToFile(jsonTextObj.toString());
+//          Log.d("main activity", "Stored file on QR Generate: " + jsonTextObj.toString());
+//        } catch (JSONException e) {
+//          e.printStackTrace();
+//        }
+//
+//        loadUrl(launchUrl);
+//      }
+//    } else {
+//      Log.d("lifecycle", "onResume. Route to Index.");
+//
+//      try {
+//        JSONObject jsonTextObj = new JSONObject(text);
+//        Log.d("lifecycle","TestJsonParse" + jsonTextObj);
+//        jsonTextObj.put("Page", strGeneratorMsg);
+//        AccountAmount = jsonTextObj.getString("Amount");
+//        writeToFile(jsonTextObj.toString());
+//        Log.d("main activity", "Stored file on QR Generate: " + jsonTextObj.toString());
+//      } catch (JSONException e) {
+//        e.printStackTrace();
+//      }
+//
+//      super.onResume();
+////      loadUrl(launchUrl);
+//    }
+//  }
+
+//  @Override
+//  public void onResume()
+//  {
+//    String strGeneratorMsg = "QRGenerator";
+//    String strScanMsg = "QRScanner";
+//    String strIndexMsg = "Index";
+//    String message = (String) getIntent().getSerializableExtra("action");
+//
+//    if(message.equals(strGeneratorMsg)){
+//      loadUrl("file:///android_asset/www/index.html#/generate");
+//    } else if (message.equals(strScanMsg)){
+//      loadUrl("file:///android_asset/www/index.html#/scan");
+//    } else if (message.equals(strIndexMsg)){
+//      loadUrl(launchUrl);
+//    } else {
+//      super.onResume();
+//    }
+//
+//    Log.d("lifecycle","onResume INVOKED" + message);
+//    readFromFile();
+//  }
+
+  public void writeToFile(String data) {
+    try {
+      OutputStreamWriter outputStreamWriter = new OutputStreamWriter(getBaseContext().openFileOutput("Config.txt", MODE_ENABLE_WRITE_AHEAD_LOGGING));
+      Log.d("write activity", "Stored file: " + data);
+      outputStreamWriter.write(data);
+      outputStreamWriter.close();
+    }
+    catch (IOException e) {
+      Log.e("Exception", "File write failed: " + e.toString());
+    }
+  }
+
+  public String readFromFile() {
+
+    String ret = "";
+
+    try {
+      InputStream inputStream = getBaseContext().openFileInput("Example.txt");
+
+      if ( inputStream != null ) {
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        String receiveString = "";
+        StringBuilder stringBuilder = new StringBuilder();
+
+        while ( (receiveString = bufferedReader.readLine()) != null ) {
+          stringBuilder.append(receiveString);
+        }
+
+        inputStream.close();
+        ret = stringBuilder.toString();
+
+        JSONObject jsonObj = new JSONObject(ret);
+
+        Log.d("main activity", "Founded file: " + jsonObj);
+      }
+    }
+    catch (FileNotFoundException e) {
+      Log.e("main activity", "File not found: " + e.toString());
+    } catch (IOException e) {
+      Log.e("main activity", "Can not read file: " + e.toString());
+    } catch (JSONException e) {
+      e.printStackTrace();
+    }
+
+    return ret;
+  }
+  public String readFromFile2() {
+
+    String ret = "";
+
+    try {
+      InputStream inputStream = getBaseContext().openFileInput("Config.txt");
+
+      if ( inputStream != null ) {
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        String receiveString = "";
+        StringBuilder stringBuilder = new StringBuilder();
+
+        while ( (receiveString = bufferedReader.readLine()) != null ) {
+          stringBuilder.append(receiveString);
+        }
+
+        inputStream.close();
+        ret = stringBuilder.toString();
+
+//        JSONObject jsonObj = new JSONObject(ret);
+
+        Log.d("main activity", "Founded file2: " + ret);
+      }
+    }
+    catch (FileNotFoundException e) {
+      Log.e("main activity", "File not found: " + e.toString());
+    } catch (IOException e) {
+      Log.e("main activity", "Can not read file: " + e.toString());
+    }
+
+    return ret;
+  }
+}
